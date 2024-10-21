@@ -32,8 +32,9 @@ function addTask() {
 
 // Edit tasks by id
 function editTask($task_id) {
+	global $tasks, $form_data;
 	$tasks[$task_id] = [
-		'id' => (count($tasks) + 1),
+		'id' => $task_id,
 		'title' => $form_data['task_title'],
 		'description' => $form_data['description']
 	];
@@ -41,6 +42,7 @@ function editTask($task_id) {
 
 // Delete tasks by id
 function deleteTask($task_id) {
+	global $tasks;
 	unset($tasks[$task_id]);
 }
 
