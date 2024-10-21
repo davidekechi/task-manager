@@ -28,8 +28,9 @@
 <body>
 
     <main class="container px-48 mt-20">
+
         <!-- ADD TASKS HERE -->
-        <section class="addTask">
+        <section class="addTask hidden">
             <h2 class="text-lg font-semibold mb-2">Create New Task</h2>
             <form action="includes/server.php" method="POST">
                 <div>
@@ -48,13 +49,17 @@
 
         <!-- DISPLAY TASKS HERE -->
         <section class="displayTasks">
+            <div class="flex justify-between">
+                <h2 class="text-2xl font-semibold mb-2">Task Manager</h2>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#taskModal">New Task</button>
+            </div>
             <?php  if (!count($tasks)): ?>
                 <div class="grid justify-center">
-                    <h2 class="text-2xl">No tasks to show</h2>
+                    <h2 class="text-xl">No tasks to show</h2>
                     <button class="mt-2 btn btn-primary align-center">Create tasks</button>
                 </div>
             <?php else: ?>
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
                             <th></th>
@@ -66,15 +71,37 @@
                     <tbody>
                         <?php foreach ($tasks as $key => $task): ?>
                             <tr>
-                                <td><?php $key ?></td>
-                                <td><?php $task['title'] ?></td>
-                                <td><?php $task['description'] ?></td>
+                                <td><?php echo $key ?></td>
+                                <td><?php echo $task['title'] ?></td>
+                                <td><?php echo $task['description'] ?></td>
+                                <td>
+                                    <div>
+                                        <button href="#" class="btn btn-sm btn-warning">Edit</button>
+                                        <button href="#" class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
                 </table>
             <?php endif ?>
         </section>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script src="js/script.js"></script> <!-- Link to JS -->
