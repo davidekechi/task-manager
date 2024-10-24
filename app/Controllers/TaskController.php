@@ -3,7 +3,7 @@
 namespace Controllers;
 
 class TaskController {
-	public $tasks = [];
+	private $tasks = [];
 
 	public function __construct() {
 
