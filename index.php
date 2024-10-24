@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    $tasks = isset($_SESSION['tasks']) ? $_SESSION['tasks'] : [];
+    include 'routes/web.php';
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +32,7 @@
         <!-- ADD TASKS HERE -->
         <section class="newTask hidden">
             <h2 class="text-lg font-semibold mb-2">Create New Task</h2>
-            <form action="includes/server.php" method="POST">
+            <form action="routes/web.php" method="POST">
                 <div>
                     <label for="taskTitle">Task Title:</label>
                     <input type="text" id="taskTitle" name="task_title" class="form-control" required>
@@ -92,7 +91,7 @@
                     <!-- EDIT SECTION FOR TASKS -->
                     <div class="editTask<?php echo $key ?> hidden">
                         <h2 class="text-lg font-semibold mb-2">Edit Task <?php echo $key ?></h2>
-                        <form action="includes/server.php" method="POST">
+                        <form action="routes/web.php" method="POST">
                             <div>
                                 <label for="taskTitle">Task Title:</label>
                                 <input type="text" name="task_title" class="form-control" value="<?php echo $task['title'] ?>" required>
@@ -111,7 +110,7 @@
                     <!-- DELETE SECTION FOR TASKS -->
                     <div class="deleteTask<?php echo $key ?> hidden">
                         <h2 class="text-lg font-semibold mb-2">Delete Task <?php echo $key ?></h2>
-                        <form action="includes/server.php" method="POST">
+                        <form action="routes/web.php" method="POST">
                             <h2 class="justify-center">Are you sure you want to delete this task?</h2>
                             <input type="hidden" name="task_id" value="<?php echo $key ?>">
                             <div>
