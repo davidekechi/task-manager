@@ -11,26 +11,24 @@ if(strpos($url, 'index.php')) {
 	$tasks = isset($_SESSION['tasks']) ? $_SESSION['tasks'] : [];
 }
 
-// Create new task
-if(isset($_POST['add_task'])) {
+// Instantiate task controller if a form is submitted
+if(isset($_POST['task_id'])) {
 	$task_driver = new Controllers\TaskController();
-	$task_driver->create($_POST);
 
-	header("Location: ../index.php");
-}
+	// Create new task
+	if(isset($_POST['add_task'])) {
+		$task_driver->create($_POST);
+	}
 
-// Update task
-if(isset($_POST['edit_task'])) {
-	$task_driver = new Controllers\TaskController();
-	$task_driver->update($_POST);
+	// Update task
+	if(isset($_POST['edit_task'])) {
+		$task_driver->update($_POST);
+	}
 
-	header("Location: ../index.php");
-}
-
-// Delete task
-if(isset($_POST['delete_task'])) {
-	$task_driver = new Controllers\TaskController();
-	$task_driver->delete($_POST);
+	// Delete task
+	if(isset($_POST['delete_task'])) {
+		$task_driver->delete($_POST);
+	}
 
 	header("Location: ../index.php");
 }

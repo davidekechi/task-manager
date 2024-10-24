@@ -41,6 +41,7 @@
                     <label for="description">Description:</label>
                     <textarea id="description" name="description" class="form-control" required></textarea>
                 </div>
+                <input type="hidden" name="task_id" value="">
                 <div>
                     <button type="submit" class="mt-2 btn btn-primary" name="add_task">Add Task</button>
                 </div>
