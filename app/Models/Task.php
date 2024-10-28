@@ -3,14 +3,15 @@
 namespace App\Models;
 
 class Task {
+	private static $fileName = '/tmp/TasksFile.json';
+
 	protected function getAllTasks() {
 		// Find tasks file and read it
-		$fileName = '/tmp/TasksFile.json';
-		if (!file_exists($fileName)) {
+		if (!file_exists(self::$fileName)) {
 			return [];
 		}else{
-			$handle = fopen($fileName, 'r') or die("Unable to open file!");
-			$tasks_data = fread($handle, filesize($fileName));
+			$handle = fopen(self::$fileName, 'r') or die("Unable to open file!");
+			$tasks_data = fread($handle, filesize(self::$fileName));
 			fclose($handle);
 
 			return json_decode($tasks_data);
@@ -24,7 +25,7 @@ class Task {
 		}
 
 		// Create and write tasks to temp file
-		$handle = fopen('/tmp/TasksFile.json', 'w') or die("Unable to open file!");
+		$handle = fopen(self::$fileName, 'w') or die("Unable to open file!");
 		fwrite($handle, json_encode($new_task));
 		fclose($handle);
 	}
