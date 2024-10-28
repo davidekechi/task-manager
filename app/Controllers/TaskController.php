@@ -22,7 +22,8 @@ class TaskController extends Task {
 			'id' => $task_id,
 			'count' => count((array) $allTasks) + 1,
 			'title' => $form_data['task_title'],
-			'description' => $form_data['description']
+			'description' => $form_data['description'],
+			'status' => 'pending'
 		];
 
 		$this->create($this->task);
@@ -35,7 +36,8 @@ class TaskController extends Task {
 			'id' => $form_data['task_id'],
 			'count' => $form_data['count'],
 			'title' => $form_data['task_title'],
-			'description' => $form_data['description']
+			'description' => $form_data['description'],
+			'status' => $form_data['status'] ? $form_data['status'] : 'pending',
 		];
 
 		$this->update($this->task);
