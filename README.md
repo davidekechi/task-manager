@@ -13,7 +13,7 @@ The project is built to store tasks locally and temporarily in your computer.
 - Change the file path in this line to your own - `private static $fileName = path/to/TasksFile.json`
 
 ### For Mac users: 
-- You can run the project as is as t will store the tasks temporarily in your /tmp folder and will delete the next time you shut down or restart your computer.
+- You can run the project as is as it will store the tasks json file temporarily in your /tmp folder and will delete the next time you shut down or restart your computer.
 
 
 
