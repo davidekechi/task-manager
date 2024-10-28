@@ -2,12 +2,24 @@
 
 namespace Views;
 
-class TaskView {
-	public $tasks = [];
+use app\Models\Task;
 
-	public function getTasks() {
-		if(isset($_SESSION['tasks'])) {
-			$this->tasks = $_SESSION['tasks'];
+class TaskView extends Task {
+	private $allTasks;
+
+	public function getTasks($uid) {
+		// Get data from parent class
+		$this->allTasks = $this->getAllTasks();
+
+		// var_dump($this->allTasks);
+
+		if (empty($this->allTasks)) {
+			return $this->allTasks;
 		}
+
+		// Return only data belonging to specific user
+		return array_filter((array)$this->allTasks, function($task) use ($uid) {
+			return $task->uid == $uid;
+		});
 	}
 }

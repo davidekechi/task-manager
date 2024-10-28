@@ -52,11 +52,11 @@
         <section class="displayTasks">
             <div class="flex justify-between">
                 <h2 class="text-2xl font-semibold mb-2">Task Manager</h2>
-                <?php  if (count($tasks)): ?>
+                <?php  if (count((array) $tasks)): ?>
                     <button class="btn btn-primary btn-sm newTaskBtn">New Task</button>
                 <?php endif ?>
             </div>
-            <?php  if (!count($tasks)): ?>
+            <?php  if (!count((array) $tasks)): ?>
                 <div class="grid justify-center">
                     <h2 class="text-xl">No tasks to show</h2>
                     <button class="mt-2 btn btn-primary align-center newTaskBtn">Create tasks</button>
@@ -75,8 +75,8 @@
                         <?php foreach ($tasks as $key => $task): ?>
                             <tr>
                                 <td><?php echo $key ?></td>
-                                <td><?php echo $task['title'] ?></td>
-                                <td><?php echo $task['description'] ?></td>
+                                <td><?php echo $task->title ?></td>
+                                <td><?php echo $task->description ?></td>
                                 <td>
                                     <div>
                                         <button href="#" class="btn btn-sm btn-warning" onclick="openModal('edit', '<?php echo $key ?>')">Edit</button>
@@ -95,11 +95,11 @@
                         <form action="routes/web.php" method="POST">
                             <div>
                                 <label for="taskTitle">Task Title:</label>
-                                <input type="text" name="task_title" class="form-control" value="<?php echo $task['title'] ?>" required>
+                                <input type="text" name="task_title" class="form-control" value="<?php echo $task->title ?>" required>
                             </div>
                             <div class="mt-2">
                                 <label for="description">Description:</label>
-                                <textarea name="description" class="form-control" required><?php echo $task['description'] ?></textarea>
+                                <textarea name="description" class="form-control" required><?php echo $task->description ?></textarea>
                             </div>
                             <input type="hidden" name="task_id" value="<?php echo $key ?>">
                             <div>

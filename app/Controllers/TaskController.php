@@ -2,26 +2,28 @@
 
 namespace Controllers;
 
-class TaskController {
-	private $tasks = [];
+use app\Models\Task;
+
+class TaskController extends Task {
+	private $tasks;
 
 	public function __construct() {
 
 		// Create or update tasks depending on if tasks exists in session
-		if (!isset($_SESSION['tasks'])) {
-			$_SESSION['tasks'] = [];
-		}
-
-		$this->tasks = &$_SESSION['tasks'];
 	}
 
 	// Add task function
-	public function create(array $form_data) {
-		$this->tasks[(count($this->tasks) + 1)] = [
-			'id' => (count($this->tasks) + 1),
+	public function addTask(array $form_data) {
+		$allTasks = $this->getAllTasks();
+
+		$this->tasks[(count((array)$allTasks) + 1)] = [
+			'uid' => $_SESSION['uid'],
+			'id' => (count((array)$allTasks) + 1),
 			'title' => $form_data['task_title'],
 			'description' => $form_data['description']
 		];
+
+		$createTask = $this->create($this->tasks);
 	}
 
 	// Update task function
