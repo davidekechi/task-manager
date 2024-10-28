@@ -11,8 +11,6 @@ class TaskView extends Task {
 		// Get data from parent class
 		$this->allTasks = $this->getAllTasks();
 
-		// var_dump($this->allTasks);
-
 		if (empty($this->allTasks)) {
 			return $this->allTasks;
 		}

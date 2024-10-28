@@ -79,8 +79,8 @@
                                 <td><?php echo $task->description ?></td>
                                 <td>
                                     <div>
-                                        <button href="#" class="btn btn-sm btn-warning" onclick="openModal('edit', '<?php echo $key ?>')">Edit</button>
-                                        <button href="#" class="btn btn-sm btn-danger" onclick="openModal('delete', '<?php echo $key ?>')">Delete</button>
+                                        <button href="#" class="btn btn-sm btn-warning" onclick="openModal('edit', '<?php echo $task->id ?>')">Edit</button>
+                                        <button href="#" class="btn btn-sm btn-danger" onclick="openModal('delete', '<?php echo $task->id ?>')">Delete</button>
                                     </div>
                                 </td>
                             </tr>
@@ -90,7 +90,7 @@
 
                 <?php foreach ($tasks as $key => $task): ?>
                     <!-- EDIT SECTION FOR TASKS -->
-                    <div class="editTask<?php echo $key ?> hidden">
+                    <div class="editTask<?php echo $task->id ?> hidden">
                         <h2 class="text-lg font-semibold mb-2">Edit Task <?php echo $key ?></h2>
                         <form action="routes/web.php" method="POST">
                             <div>
@@ -101,7 +101,8 @@
                                 <label for="description">Description:</label>
                                 <textarea name="description" class="form-control" required><?php echo $task->description ?></textarea>
                             </div>
-                            <input type="hidden" name="task_id" value="<?php echo $key ?>">
+                            <input type="hidden" name="task_id" value="<?php echo $task->id ?>">
+                            <input type="hidden" name="count" value="<?php echo $task->count ?>">
                             <div>
                                 <button type="submit" class="mt-2 btn btn-warning" name="edit_task">Edit Task</button>
                             </div>
@@ -109,11 +110,11 @@
                     </div>
 
                     <!-- DELETE SECTION FOR TASKS -->
-                    <div class="deleteTask<?php echo $key ?> hidden">
+                    <div class="deleteTask<?php echo $task->id ?> hidden">
                         <h2 class="text-lg font-semibold mb-2">Delete Task <?php echo $key ?></h2>
                         <form action="routes/web.php" method="POST">
                             <h2 class="justify-center">Are you sure you want to delete this task?</h2>
-                            <input type="hidden" name="task_id" value="<?php echo $key ?>">
+                            <input type="hidden" name="task_id" value="<?php echo $task->id ?>">
                             <div>
                                 <button type="submit" class="mt-4 btn btn-danger" name="delete_task">Delete Task</button>
                             </div>

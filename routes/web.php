@@ -15,7 +15,9 @@ if(strpos($url, 'index.php')) {
 		$tasks_list = new Views\TaskView();
 		$tasks = $tasks_list->getTasks($uid);
 
-		// var_dump($tasks);
+		uasort($tasks, function($a, $b) {
+			return $b->count <=> $a->count;
+		});
 	}else{
 		// Create uid and tasks in session
 		$uid = $_SESSION['uid'] = bin2hex(random_bytes(10));
@@ -35,12 +37,12 @@ if(isset($_POST['task_id'])) {
 
 	// Update task
 	if(isset($_POST['edit_task'])) {
-		$task_driver->update($_POST);
+		$task_driver->editTask($_POST);
 	}
 
 	// Delete task
 	if(isset($_POST['delete_task'])) {
-		$task_driver->delete($_POST);
+		$task_driver->deleteTask($_POST);
 	}
 
 	header("Location: ../index.php");
