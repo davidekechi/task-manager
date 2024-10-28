@@ -79,7 +79,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($tasks as $key => $task): ?>
+                        <?php foreach ($pending_tasks as $key => $task): ?>
+                            <tr>
+                                <td><?php echo $key ?></td>
+                                <td><?php echo $task->title ?></td>
+                                <td><?php echo $task->description ?></td>
+                                <td>
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <?php if($task->status == 'pending'): ?>
+                                                <button class="btn btn-sm rounded-lg" style="border: 1px solid black !important;" onclick="openModal('complete', '<?php echo $task->id ?>')">
+                                                    <i class="far fa-check"></i> Mark Complete
+                                                </button>
+                                            <?php else: ?>
+                                                <i class="fas fa-circle-check text-primary"></i> Completed
+                                            <?php endif ?>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-ellipsis cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                            <ul class="dropdown-menu px-2">
+                                                <?php if($task->status == 'pending'): ?>
+                                                    <li class="border-b"><a class="dropdown-item" href="#" onclick="openModal('edit', '<?php echo $task->id ?>')">Edit</a></li>
+                                                <?php endif ?>
+                                                <li><a class="dropdown-item text-danger" href="#" onclick="openModal('delete', '<?php echo $task->id ?>')">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+
+                        <?php foreach ($complete_tasks as $key => $task): ?>
                             <tr>
                                 <td><?php echo $key ?></td>
                                 <td><?php echo $task->title ?></td>

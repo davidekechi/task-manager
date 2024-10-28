@@ -15,7 +15,20 @@ if(strpos($url, 'index.php')) {
 		$tasks_list = new Views\TaskView();
 		$tasks = $tasks_list->getTasks($uid);
 
-		uasort($tasks, function($a, $b) {
+		// Divide tasks into pending and complete tasks
+		$pending_tasks = array_filter((array)$tasks, function($task) {
+			return $task->status == 'pending';
+		});
+
+		$complete_tasks = array_filter((array)$tasks, function($task) {
+			return $task->status == 'complete';
+		});
+
+		uasort($pending_tasks, function($a, $b) {
+			return $b->count <=> $a->count;
+		});
+
+		uasort($complete_tasks, function($a, $b) {
 			return $b->count <=> $a->count;
 		});
 	}else{
